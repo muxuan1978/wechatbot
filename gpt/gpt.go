@@ -126,6 +126,12 @@ type ChatCompletionRequestBody struct {
 	User             string         `json:"user,omitempty"`
 }
 
+type Usage struct {
+	PromptTokens     int `json:"prompt_tokens"`
+	CompletionTokens int `json:"completion_tokens"`
+	TotalTokens      int `json:"total_tokens"`
+}
+
 type ChatCompletionResponse struct {
 	ID      string       `json:"id"`
 	Object  string       `json:"object"`
