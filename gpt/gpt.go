@@ -151,7 +151,7 @@ func Turbo(msg string) (string, error) {
 	requestBody := ChatCompletionRequestBody{
 		Model: "gpt-3.5-turbo",
 		Messages: []ChatMessage{
-			{Role: "user", Content: req},
+			{Role: "user", Content: msg},
 		},
 	}
 	requestData, err := json.Marshal(requestBody)
