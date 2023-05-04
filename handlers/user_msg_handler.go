@@ -77,6 +77,9 @@ func (h *UserMessageHandler) ReplyText() error {
 		return nil
 	}
 	logger.Info(fmt.Sprintf("h.sender.NickName == %+v", h.sender.NickName))
+	if h.sender.NickName == "梦想" {
+	    return nil
+	}
 	// 2.向GPT发起请求，如果回复文本等于空,不回复
 	reply, err = gpt.Turbo(h.getRequestText())
 	if err != nil {
