@@ -149,7 +149,7 @@ type ChatChoice struct {
 func Turbo(msg string) (string, error) {
 	cfg := config.LoadConfig()
 	requestBody := ChatCompletionRequestBody{
-		Model: "gpt-3.5-turbo",
+		Model: cfg.Model,
 		Messages: []ChatMessage{
 			{Role: "user", Content: msg},
 		},
