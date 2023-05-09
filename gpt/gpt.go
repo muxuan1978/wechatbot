@@ -74,7 +74,7 @@ func Completions(msg string) (string, error) {
 	apiKey := config.LoadConfig().ApiKey
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+apiKey)
-	client := &http.Client{Timeout: 30 * time.Second}
+	client := &http.Client{Timeout: 300 * time.Second}
 	response, err := client.Do(req)
 	if err != nil {
 		return "", err
@@ -168,7 +168,7 @@ func Turbo(msg string) (string, error) {
 	apiKey := cfg.ApiKey
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+apiKey)
-	client := &http.Client{Timeout: 30 * time.Second}
+	client := &http.Client{Timeout: 300 * time.Second}
 	response, err := client.Do(req)
 	if err != nil {
 		return "", err
