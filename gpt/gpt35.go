@@ -20,8 +20,9 @@ func NewGpr35() *openaigo.Client {
 }
 
 func (c *MyGpt) Gpt3P5(req string) string {
+	cfg := config.LoadConfig()
 	request := openaigo.ChatCompletionRequestBody{
-		Model: "gpt-3.5-turbo",
+		Model: cfg.Model,
 		Messages: []openaigo.ChatMessage{
 			{Role: "user", Content: req},
 		},
