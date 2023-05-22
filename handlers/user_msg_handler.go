@@ -78,8 +78,8 @@ func (h *UserMessageHandler) ReplyText() error {
 	}
 	logger.Info(fmt.Sprintf("h.sender.NickName == %+v", h.sender.NickName))
 	//if h.sender.NickName == "梦想" {
-	if strings.Contains(config.LoadConfig().BlackListUser, h.sender.NickName)
-	    return nil
+	if strings.Contains(config.LoadConfig().BlackListUser, h.sender.NickName) {
+		return nil
 	}
 	// 2.向GPT发起请求，如果回复文本等于空,不回复
 	reply, err = gpt.Turbo(h.getRequestText())
