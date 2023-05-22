@@ -29,6 +29,8 @@ type Configuration struct {
 	ReplyPrefix string `json:"reply_prefix"`
 	// 清空会话口令
 	SessionClearToken string `json:"session_clear_token"`
+	// 黑名单
+	BlackListUser string `json:"black_list_user"`
 }
 
 var config *Configuration
@@ -45,6 +47,7 @@ func LoadConfig() *Configuration {
 			Model:             "text-davinci-003",
 			Temperature:       0.9,
 			SessionClearToken: "下一个问题",
+			BlackListUser:     "",
 		}
 
 		// 判断配置文件是否存在，存在直接JSON读取
@@ -72,6 +75,7 @@ func LoadConfig() *Configuration {
 		Temperature := os.Getenv("TEMPREATURE")
 		ReplyPrefix := os.Getenv("REPLY_PREFIX")
 		SessionClearToken := os.Getenv("SESSION_CLEAR_TOKEN")
+		BlackListUser := os.Getenv("BLACK_LIST_USER")
 		if ApiKey != "" {
 			config.ApiKey = ApiKey
 		}
@@ -110,6 +114,9 @@ func LoadConfig() *Configuration {
 		}
 		if SessionClearToken != "" {
 			config.SessionClearToken = SessionClearToken
+		}
+		if BlackListUser != "" {
+			config.BlackListUser = BlackListUser
 		}
 
 	})

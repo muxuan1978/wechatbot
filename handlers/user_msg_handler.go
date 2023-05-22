@@ -77,7 +77,8 @@ func (h *UserMessageHandler) ReplyText() error {
 		return nil
 	}
 	logger.Info(fmt.Sprintf("h.sender.NickName == %+v", h.sender.NickName))
-	if h.sender.NickName == "梦想" {
+	//if h.sender.NickName == "梦想" {
+	if strings.Contains(config.LoadConfig().BlackListUser, h.sender.NickName)
 	    return nil
 	}
 	// 2.向GPT发起请求，如果回复文本等于空,不回复
@@ -133,11 +134,11 @@ func (h *UserMessageHandler) getRequestText() string {
 // buildUserReply 构建用户回复
 func buildUserReply(reply string) string {
 	// 1.去除空格问号以及换行号，如果为空，返回一个默认值提醒用户
-	textSplit := strings.Split(reply, "\n\n")
-	if len(textSplit) > 1 {
-		trimText := textSplit[0]
-		reply = strings.Trim(reply, trimText)
-	}
+	//textSplit := strings.Split(reply, "\n\n")
+	//if len(textSplit) > 1 {
+	//	trimText := textSplit[0]
+	//	reply = strings.Trim(reply, trimText)
+	//}
 	reply = strings.TrimSpace(reply)
 
 	reply = strings.TrimSpace(reply)
@@ -148,6 +149,9 @@ func buildUserReply(reply string) string {
 	// 2.如果用户有配置前缀，加上前缀
 	reply = config.LoadConfig().ReplyPrefix + "\n" + reply
 	reply = strings.Trim(reply, "\n")
+
+	// 2.1. 补充一个feature，在文本最后增加清空的提示
+	reply = reply + "\n\n" + "输入【" + config.LoadConfig().SessionClearToken + "】会清空缓存重新开始！"
 
 	// 3.返回拼接好的字符串
 	return reply
