@@ -83,6 +83,7 @@ func (h *UserMessageHandler) ReplyText() error {
 	names := strings.Split(config.LoadConfig().BlackListUser, ",")
 	for _, name := range names {
 		if strings.Contains(name, h.sender.NickName) {
+			logger.Info(fmt.Sprintf("%+v in Black List", h.sender.NickName))
 			return nil
 		}
 	}
