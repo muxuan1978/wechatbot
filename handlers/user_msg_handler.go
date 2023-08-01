@@ -65,7 +65,7 @@ func (h *UserMessageHandler) handle() error {
 
 // ReplyText 发送文本消息到群
 func (h *UserMessageHandler) ReplyText() error {
-	logger.Info(fmt.Sprintf("Received User %v Text Msg : %v", h.sender.NickName, h.msg.Content))
+	logger.Info(fmt.Sprintf("Received User %+v Text Msg : %+v", h.sender.NickName, h.msg.Content))
 	var (
 		reply string
 		err   error
@@ -82,7 +82,7 @@ func (h *UserMessageHandler) ReplyText() error {
 	// 先把配置项按逗号拆分，然后看逐个值是否包含发送者的昵称，如果包含，就不回复
 	names := strings.Split(config.LoadConfig().BlackListUser, ",")
 	for _, name := range names {
-		if strings.Contains(name, h.sender.NickName) {
+		if strings.Contains(h.sender.NickName, name) {
 			logger.Info(fmt.Sprintf("%+v in Black List", h.sender.NickName))
 			return nil
 		}
